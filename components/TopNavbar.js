@@ -27,9 +27,9 @@ export default function TopNavbar() {
         {username && (
           <>
             <li className="push-left">
-              <Link href="/admin">
+              {/* <Link href="/admin">
                 <button className="btn-blue">Write Posts</button>
-              </Link>
+              </Link> */}
             </li>
             <li>
               <Link href={`/${username}`}>

@@ -24,6 +24,7 @@ export default function AdminPostsPage(props) {
 
 function PostList() {
   const ref = firestore.collection('users').doc(auth.currentUser.uid).collection('posts');
+  var theUserID = auth.currentUser.uid;
   const query = ref.orderBy('createdAt');
   const [querySnapshot] = useCollection(query);
 
@@ -32,6 +33,7 @@ function PostList() {
   return (
     <>
       <h1>Manage your Posts</h1>
+      <div>{theUserID}</div>
       <PostFeed posts={posts} admin />
     </>
   );

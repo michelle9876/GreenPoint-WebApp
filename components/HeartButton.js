@@ -21,7 +21,6 @@ export default function Heart({ postRef }) {
   // Remove a user-to-post relationship
   const removeHeart = async () => {
     const batch = firestore.batch();
-
     batch.update(postRef, { heartCount: increment(-1) });
     batch.delete(heartRef);
 

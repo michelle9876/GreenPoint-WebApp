@@ -25,7 +25,7 @@ export default function Navbar() {
         <li>
           <Link href="/"><div className='nav-iconDIV'>
             <HomeRoundedIcon className="nav_icon"  sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
-            <div className='nav_text'>Home</div></div>
+            <div className='nav_text'style={{ color: "##34CC98" }}> Home</div></div>
           </Link>
         </li>
 

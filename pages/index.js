@@ -1,15 +1,16 @@
-import PostFeed from '../components/PostFeed';
+// import PostFeed from '../components/PostFeed';
 import Loader from '../components/Loader';
-import { firestore, fromMillis, postToJSON } from '../lib/firebase';
+import { firestore, fromMillis, postToJSON,auth } from '../lib/firebase';
 
-import { useState } from 'react';
-
+import { useState } from 'react'; 
+import NewsFeed from '../components/NewsFeed';
 // Max post to query per page
-const LIMIT = 1;
+const LIMIT = 10;
 
 export async function getServerSideProps(context) {
   const postsQuery = firestore
     .collectionGroup('posts')
+    .where('username','==','news')
     .where('published', '==', true)
     .orderBy('createdAt', 'desc')
     .limit(LIMIT);
@@ -36,6 +37,7 @@ export default function Home(props) {
     const query = firestore
       .collectionGroup('posts')
       .where('published', '==', true)
+      .where('username','==','news')
       .orderBy('createdAt', 'desc')
       .startAfter(cursor)
       .limit(LIMIT);
@@ -50,15 +52,21 @@ export default function Home(props) {
     }
   };
 
+
   return (
       <main>
-        <PostFeed posts={posts} />
+        < NewsFeed posts={posts} />
 
-        {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
 
-        <Loader show={loading} />
+        <div className='newsBtnAlign'>
+          {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
+          <Loader show={loading} />
 
-        {postsEnd && 'You have reached the end!'}
+          {postsEnd && 'You have reached the end!'}
+        </div>
+        
+
+        <div className='newsSpace'></div>
       </main>
   );
 }

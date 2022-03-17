@@ -14,6 +14,7 @@ export default function Enter(props) {
     <main>
       {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
     </main>
+  
   );
 }
 

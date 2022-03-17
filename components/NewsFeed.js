@@ -1,14 +1,16 @@
 import Link from 'next/link';
 
-export default function PostFeed({ posts, admin }) {
-  return (
-<div className='profileItemDiv'>
-  {(posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null)}
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import {
+  Typography
+} from '@mui/material';
 
-</div>
-
-  );
-  
+export default function NewsFeed({ posts, admin }) {
+  return posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null;
 }
 
 function PostItem({ post, admin = false }) {
@@ -17,27 +19,19 @@ function PostItem({ post, admin = false }) {
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
   return (
-    <div className="card">
-         
-      <Link href={`/${post.username}`}>
-        <a>
-          <strong>By @{post.username}</strong>
-        </a>
-      </Link>
+     <div className="newsCard">
 
-      <Link href={`/${post.username}/${post.slug}`}>
+        <div className='newsImage'>
+        <img src = {post.imageUrl} />
+        </div>
+       
+   <Link href={`/${post.username}/${post.slug}`}>
+       
         <h2>
           <a>{post.title}</a>
         </h2>
       </Link>
 
-      <div className='feedImage'>
-        <img src = {post.imageURL} />
-        </div>
-
-        <h2>
-        <strong>category: #{post.category}</strong>
-        </h2>
       <footer>
         <span>
           {wordCount} words. {minutesToRead} min read
@@ -46,7 +40,7 @@ function PostItem({ post, admin = false }) {
       </footer>
 
       {/* If admin view, show extra controls for user */}
-      {admin && (
+    {admin && (
         <>
           <Link href={`/admin/${post.slug}`}>
             <h3>
@@ -56,7 +50,7 @@ function PostItem({ post, admin = false }) {
 
           {post.published ? <p className="text-success">Live</p> : <p className="text-danger">Unpublished</p>}
         </>
-      )}
+      )} 
     </div>
   );
 }
