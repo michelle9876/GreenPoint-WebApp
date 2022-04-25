@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { auth, storage, STATE_CHANGED } from '../lib/firebase';
 import Loader from './Loader';
-
+import { Image, Center } from '@mantine/core'; 
 
 // Uploads images to Firebase Storage
-export default function ImageUploader() {
+export default function ImageUploader(props) {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState(null);
@@ -34,28 +34,47 @@ export default function ImageUploader() {
         .then((url) => {
           setDownloadURL(url);
           setUploading(false);
+          props.updateParent(url);
         });
     });
   };
 
+  // useEffect(()=>{
+  //   if(downloadURL !== null){
+
+  //     props.updateParent(downloadURL);
+  //   }
+  // },[downloadURL])
+
   return (
-    <div className="box">
-      <Loader show={uploading} />
-      {uploading && <h3>{progress}%</h3>}
+    <>
+      <div className="box">
+        
+        <Loader show={uploading} />
+        {uploading && <h3>{progress}%</h3>}
 
-      {!uploading && (
-        <>
-          <label className="btn">
-            📸 Upload Img
-            <input type="file" onChange={uploadFile} accept="image/x-png,image/gif,image/jpeg" />
-          </label>
-        </>
-      )}
+        {!uploading && (
+          <>
+            <label className="btn">
+              📸 Upload Image
+              <input type="file" onChange={uploadFile} accept="image/x-png,image/gif,image/jpeg" />
+            </label>
+          </>
+        )}
 
-      {downloadURL && <code className="upload-snippet">{`![alt](${downloadURL})`}</code>}
+        {/* {downloadURL && <code className="upload-snippet">{`![alt](${downloadURL})`}</code>} */}
+        
+        
+      </div>
 
-    </div>
-
+      {/* <div>
+        {downloadURL && <Image
+            radius="md"
+            src={downloadURL}
+            alt="Image to upload"
+          />}
+      </div> */}
+    </>
     
   );
 }

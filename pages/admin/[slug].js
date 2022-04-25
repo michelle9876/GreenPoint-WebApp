@@ -1,6 +1,6 @@
 import styles from '../../styles/Admin.module.css';
 import AuthCheck from '../../components/AuthCheck';
-import { firestore, auth, serverTimestamp } from '../../lib/firebase';
+import { firestore, auth, serverTimestamp, increment } from '../../lib/firebase';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -20,6 +20,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { Image, Center, Space, Text } from '@mantine/core'; 
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -34,11 +35,12 @@ const MenuProps = {
 
 const categorys = [
   'Recyle',
-  'Not using plastic bag',
-  'Use and buy less plastic package',
+  'No plastic bag',
+  'Use less plastic package',
   'Use reusable cup',
-  'Walk, Bike more, drive less',
+  'Walk, Bike more',
   'Plant a tree',
+  'Others'
 ];
 
 
@@ -59,6 +61,8 @@ function PostManager() {
 
   const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
   const [post] = useDocumentData(postRef);
+  console.log("thePost: ", post);
+  const theUID = auth.currentUser.uid;
 
   return (
     <main className={styles.container}>
@@ -66,7 +70,7 @@ function PostManager() {
         <>
           <section>
             <h1>{post.title}</h1>
-            <p>ID: {post.slug}</p>
+            {/* <p>ID: {post.slug}</p> */}
 
             <PostForm postRef={postRef} defaultValues={post} preview={preview} />
           </section>
@@ -77,6 +81,7 @@ function PostManager() {
             <Link href={`/${post.username}/${post.slug}`}>
               <button className="btn-blue">Live view</button>
             </Link>
+            <DeletePostButton postRef={postRef} uid={theUID}/>
           </aside>
         </>
       )}
@@ -88,24 +93,44 @@ function PostForm({ defaultValues, postRef, preview }) {
   const { register, handleSubmit, reset, watch, formState: { errors }, control } = useForm({ defaultValues, mode: 'onChange' });
   const { isValid, isDirty } = useFormState({control});
   // const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(defaultValues.category);
+  const [imageUrl, setImageUrl] = useState(defaultValues.imageURL);
 
-  const [category, setCategory] = React.useState([])
-  const [imageUrl, setImageUrl] = useState('');
+  React.useEffect(()=>{
+    console.log("imageUrl: ", imageUrl);
+  }, [imageUrl])
+  // const [imgURL, setImgURL] = useState(null);
 
-  const updatePost = async ({ content, published, category, imageURL }) => {
+  // const setTheImgURL = (theIMG) => {
+  //   setImageUrl(theIMG);
+  // }
+  // const updatePost = async ({ content, published, category, imageURL }) => {
+  //   await postRef.update({
+  //     category,
+  //     content,
+  //     published,
+  //     imageURL,
+  //     updatedAt: serverTimestamp(),
+  //   });
+
+  //   reset({ content, published, category, imageURL });
+
+  //   toast.success('Post updated successfully!')
+  // };
+
+  const updatePost = async ({ content, published, category }) => {
     await postRef.update({
       category,
       content,
       published,
-      imageURL,
+      imageURL: String(imageUrl),
       updatedAt: serverTimestamp(),
     });
 
-    reset({ content, published, category, imageURL });
+    reset({ content, published, category });
 
     toast.success('Post updated successfully!')
   };
-;
 
   const handleChange = (event) => {
     const {
@@ -127,8 +152,21 @@ function PostForm({ defaultValues, postRef, preview }) {
 
       <div className={preview ? styles.hidden : styles.controls}>
   
-        <ImageUploader/>
 
+
+        <div>
+        {imageUrl && <Image
+            radius="xs"
+            src={imageUrl}
+            alt="Image to upload"
+          />}
+        </div>
+
+          <Space h={20}/>
+
+        <Center>
+          <ImageUploader updateParent={setImageUrl}/>
+        </Center>
         {/* <input 
         value={imageUrl}
         onChange={(e) => setImageUrl(e.target.value)}
@@ -151,7 +189,7 @@ function PostForm({ defaultValues, postRef, preview }) {
                            }
                        })} /> */}
 
-
+{/* 
       <input placeholder="Place Image url here "
       {...register("imageURL", {            
    required: "imageURL is required",
@@ -163,9 +201,9 @@ function PostForm({ defaultValues, postRef, preview }) {
                         value: 10,
                         message: 'content is too short'
                     }
-                })}></input>
+                })}></input> */}
 
-        <FormControl sx={{ m: 1, width: 500 }}>
+        <FormControl sx={{ m: 1, width: 200 }}>
         <InputLabel id="demo-multiple-checkbox-label">Category</InputLabel>
         <Select {...register("category")}
           labelId="demo-multiple-checkbox-label"
@@ -185,15 +223,17 @@ function PostForm({ defaultValues, postRef, preview }) {
           ))}
         </Select>
       </FormControl>
+      <Space h={20}/>
+      <Text weight={500} size="xl">Content</Text>
 
       <textarea {...register("content", {            
    required: "content is required",
                     maxLength: {
-                        value: 20000,
+                        value: 10000,
                         message: 'content is too long'
                     },
                     minLength: {
-                        value: 10,
+                        value: 3,
                         message: 'content is too short'
                     }
                 })}></textarea>
@@ -219,8 +259,38 @@ function PostForm({ defaultValues, postRef, preview }) {
           Save Changes
         </button>
 
-        <div className='newsSpace'></div>
+        {/* <div className='newsSpace'></div> */}
       </div>
     </form>
+  );
+}
+
+function DeletePostButton({ postRef, uid }) {
+  const router = useRouter();
+
+  const deletePost = async () => {
+    const doIt = confirm('are you sure!');
+    if (doIt) {
+      await postRef.delete();
+
+      const batch = firestore.batch();
+
+      const userRef = firestore.collection('users').doc(uid);
+      batch.update(userRef, { posts: increment(-1) });
+  
+      await batch.commit();
+
+
+      router.push('/admin');
+      toast('post deleted ', { icon: '🗑️' });
+
+      
+    }
+  };
+
+  return (
+    <button className="btn-red" onClick={deletePost}>
+      Delete
+    </button>
   );
 }

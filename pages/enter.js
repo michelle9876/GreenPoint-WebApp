@@ -3,6 +3,7 @@ import { UserContext } from '../lib/context';
 
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
+import { Image, Center, Space, Text } from '@mantine/core';
 
 export default function Enter(props) {
   const { user, username } = useContext(UserContext);
@@ -11,9 +12,34 @@ export default function Enter(props) {
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
   return (
-    <main>
-      {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
-    </main>
+    // <main>
+    <>
+    <div className='enter-page-container'>
+    <div style={{ width: 400, marginLeft: 'auto', marginRight: 'auto' }}>
+      <Image
+        radius="md"
+        src="/enter.png"
+        
+      />
+    </div>
+      <div className='enter-button-area'>
+      <Space h={20}/> 
+        <Center>
+          {user ? !username ? <Text size='xl' weight={600} className='white-title'>Select username</Text> 
+          : <Text size='xl' weight={600} className='white-title' >Log Out</Text> 
+          : <Text className='white-title'   size='xl' weight={600}>Log In</Text>}
+        </Center>
+        <Space h={55}/>
+        <Center>
+          {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+        </Center>
+      </div>
+    </div>
+    
+    
+    </>
+      
+    // </main>
   
   );
 }
@@ -53,7 +79,7 @@ function UsernameForm() {
 
     // Commit both docs together as a batch write.
     const batch = firestore.batch();
-    batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
+    batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName,  points: 100, posts: 0, uid: user.uid  });
     batch.set(usernameDoc, { uid: user.uid });
 
     await batch.commit();

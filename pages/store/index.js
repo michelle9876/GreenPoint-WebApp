@@ -8,7 +8,7 @@ import Data from '../../components/Data';
 import { Button } from '@mui/material';
 import NextLink from 'next/link';
 import Store from '../../components/Store';
-import { firestore, fromMillis } from '../../lib/firebase';
+import { firestore, fromMillis, postToJSON2 } from '../../lib/firebase';
 // export async function getServerSideProps({ }) {
 //   //const { username } = 'michelle';
 
@@ -41,8 +41,8 @@ export async function getServerSideProps(context) {
     // .where('published', '==', true)
     // .orderBy('createdAt', 'desc')
 
-  const items = (await itemsquery.get()).docs.map(postToJSON);
-
+  const items = (await itemsquery.get()).docs.map(postToJSON2);
+  console.log("the items:  ", items);
   return {
     props: { items }, // will be passed to the page component as props
   };
@@ -57,8 +57,8 @@ export default function ShopProfilePage(props) {
   return (
     
     <div>
-      <ShopProfile theUser={user} />
-      <Store items={props.items}/>
+      <ShopProfile theUser={user} theUsername={username}/>
+      <Store items={props.items} theUser={user}/>
       {/* <PostFeed posts={posts} /> */}
       {/* <Grid container spacing={3}>
         {Data.products.map((product)=> (
@@ -86,7 +86,7 @@ export default function ShopProfilePage(props) {
           </Grid>
         ))}
       </Grid> */}
-      <div className='newsSpace'></div>
+      {/* <div className='newsSpace'></div> */}
     </div>
 
     

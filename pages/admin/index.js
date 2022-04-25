@@ -16,7 +16,7 @@ export default function AdminPostsPage(props) {
     <main>
       <AuthCheck>
         <PostList />
-        <CreateNewPost />
+        {/* <CreateNewPost /> */}
       </AuthCheck>
     </main>
   );
@@ -33,7 +33,7 @@ function PostList() {
   return (
     <>
       <h1>Manage your Posts</h1>
-      <div>{theUserID}</div>
+      {/* <div>{theUserID}</div> */}
       <PostFeed posts={posts} admin />
     </>
   );

@@ -11,6 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@mantine/core": "^4.1.2",
+    "@mantine/hooks": "^4.1.2",
+    "@mantine/next": "^4.1.2",
     "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.4",
     "firebase": "^8.2.1",
@@ -24,7 +27,11 @@
     "react-hot-toast": "^2.2.0",
     "react-markdown": "^8.0.0",
     "react-router": "^6.2.2",
-    "react-router-dom": "^6.2.2"
+    "react-router-dom": "^6.2.2",
+    "react-slideshow-image": "^3.7.1",
+    "tabler-icons-react": "^1.44.0",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "eslint": "8.10.0",

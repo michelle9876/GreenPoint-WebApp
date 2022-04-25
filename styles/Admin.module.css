@@ -13,10 +13,10 @@
     flex-direction: column;
     width: 20%;
     min-width: 250px;
-    min-height: 200px;
+    min-height: 250px;
     text-align: center;
     position: sticky;
-    top: 80px;
+    /* top: 80px; */
     height: 0;
   }
   
@@ -41,6 +41,14 @@
     outline: none;
     border: none;
     font-size: 2.5rem;
+    width: 100%;
+    padding: 5px 10px;
+  }
+
+  .input2 {
+    outline: none;
+    border: none;
+    font-size: 1.5rem;
     width: 100%;
     padding: 5px 10px;
   }

@@ -25,20 +25,24 @@ export default function Navbar() {
         <li>
           <Link href="/"><div className='nav-iconDIV'>
             <HomeRoundedIcon className="nav_icon"  sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
-            <div className='nav_text'style={{ color: "##34CC98" }}> Home</div></div>
+            {/*   <div className='nav_text'style={{ color: "##34CC98" }}> Home</div> */}
+            </div>
           </Link>
         </li>
 
         <li>
           <Link href="/feed"><div className='nav-iconDIV'>
           <FeedRoundedIcon  className="nav_icon" sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
-           <div className='nav_text'>Feed</div></div>
+           {/* <div className='nav_text'>Feed</div> */}
+           </div>
           </Link>
         </li>
 
         <li>
         <Link href="/upload"><div className='nav-iconDIV'>
-        <img src='bar_feedcontent.png' style={{  width: 100 }}/> 
+          <div className='nav_icon'>
+            <img src='/bar_feedcontent.png' style={{}}/> 
+          </div>
         </div>         
         </Link>
         </li>
@@ -46,17 +50,31 @@ export default function Navbar() {
         <li>
         <Link href="/store"><div className='nav-iconDIV'>
             <ShoppingCartRoundedIcon className="nav_icon"  sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
-            <div className='nav_text'>Store</div></div>
+            {/* <div className='nav_text'>Store</div> */}
+            </div>
           </Link>
         </li>
         
-        <li>
-        <Link href={`/${username}`}><div className='nav-iconDIV'>
-        <PersonRoundedIcon className="nav_icon" sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
-            <div className='nav_text'>MyPage</div></div>
-          </Link>
-        </li>
-        
+        {username && (
+          <li>
+          <Link href={`/${username}`}><div className='nav-iconDIV'>
+          <PersonRoundedIcon className="nav_icon" sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
+              {/* <div className='nav_text'>MyPage</div> */}
+              </div>
+            </Link>
+          </li>
+        )}
+
+
+        {!username && (
+          <li>
+            <Link href="/enter"><div className='nav-iconDIV'>
+          <PersonRoundedIcon className="nav_icon" sx={{ fontSize: 45 }} style={{ color: "#C4C4C4" }} />
+              {/* <div className='nav_text'>MyPage</div> */}
+              </div>
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

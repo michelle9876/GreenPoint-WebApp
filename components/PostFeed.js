@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { Card, Image, Text, Group, Space } from '@mantine/core';
+
 
 export default function PostFeed({ posts, admin }) {
   return (
@@ -15,48 +17,38 @@ function PostItem({ post, admin = false }) {
   // Naive method to calc word count and read time
   const wordCount = post?.content.trim().split(/\s+/g).length;
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
-
+  console.log("ThePost: ", post);
   return (
-    <div className="card">
-         
-      <Link href={`/${post.username}`}>
-        <a>
-          <strong>By @{post.username}</strong>
-        </a>
-      </Link>
+  <Link href={`/${post.username}/${post.slug}`}>
+    <div className='card-height'>
+    <Card
+      shadow="sm"
+      p="xl"
+      component="a"
+      target="_blank"
+      radius={15}
+    >
+      <Card.Section>
+        <Image src={post.imageURL} height={220} />
+      </Card.Section>
 
-      <Link href={`/${post.username}/${post.slug}`}>
-        <h2>
-          <a>{post.title}</a>
-        </h2>
-      </Link>
+      <Text weight={500} size="lg">
+        {post.title}
+      </Text>
 
-      <div className='feedImage'>
-        <img src = {post.imageURL} />
+      <Text size="sm">
+        <div>
+          <div> category: #{post.category} </div>
+          <Space h={10}/>
+          <Group position="apart">
+            <div className='post-name-container'><div>By</div> <Space w={5}/> <Text weight={500} size="sm">{post.username}</Text></div>
+            <div> 💚 {post.heartCount || 0} Hearts </div>
+          </Group>
+          {/* <div className='text-right'> 💗 {post.heartCount || 0} Hearts </div> */}
         </div>
-
-        <h2>
-        <strong>category: #{post.category}</strong>
-        </h2>
-      <footer>
-        <span>
-          {wordCount} words. {minutesToRead} min read
-        </span>
-        <span className="push-left">💗 {post.heartCount || 0} Hearts</span>
-      </footer>
-
-      {/* If admin view, show extra controls for user */}
-      {admin && (
-        <>
-          <Link href={`/admin/${post.slug}`}>
-            <h3>
-              <button className="btn-blue">Edit</button>
-            </h3>
-          </Link>
-
-          {post.published ? <p className="text-success">Live</p> : <p className="text-danger">Unpublished</p>}
-        </>
-      )}
+      </Text>
+    </Card>
     </div>
+    </Link>
   );
 }

@@ -9,6 +9,7 @@ import AuthCheck from '../../components/AuthCheck';
 import HeartButton from '../../components/HeartButton';
 import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
+import { Center, Space } from '@mantine/core';
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -64,10 +65,40 @@ export default function Post(props) {
     <main className={styles.container}>
 
       <section>
+        
         <PostContent post={post} />
+        
+        <Space h={20}/>
+
+        <Center>
+        <div className='post-layout'>
+        <p>
+          <strong>{post.heartCount || 0} 💚</strong>
+        </p>
+        <Space w={10}/>
+        <AuthCheck
+          fallback={
+            <Link href="/enter">
+              <button>💚 Sign Up</button>
+            </Link>
+          }
+        >
+          <HeartButton postRef={postRef} />
+        </AuthCheck>
+        
+        {currentUser?.uid === post.uid && (
+          <>
+          <Space w={10}/>
+          <Link href={`/admin/${post.slug}`}>
+            <button className="btn-blue">Edit Post</button>
+          </Link>
+          </>
+        )}
+        </div>
+        </Center>
       </section>
 
-      <aside className="card">
+      {/* <aside className="card">
         <p>
           <strong>{post.heartCount || 0} 🤍</strong>
         </p>
@@ -88,7 +119,7 @@ export default function Post(props) {
           </Link>
         )}
 
-      </aside>
+      </aside> */}
     </main>
   );
 }

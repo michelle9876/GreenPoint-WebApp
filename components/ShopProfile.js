@@ -1,12 +1,12 @@
-import {
-  Button,
-Typography
-} from '@mui/material';
-import { auth, firestore, getUserWithUsername } from '../lib/firebase';
+import {Button,Typography} from '@mui/material';
+import { auth, firestore, getUserWithUsername } from '/lib/firebase';
+import AuthCheck from '/components/AuthCheck';
+import { useState, useEffect } from 'react'; 
+import { Text,Space, Group, Center } from '@mantine/core';
+import Link from 'next/link';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
-
-
-export async function getServerSideProps({ }) {
+export async function getServerSideProps({}) {
 
   let user = null;
   let posts = null;
@@ -43,31 +43,86 @@ export async function getServerSideProps({ }) {
 }
 
 
-export default function ShopProfile({ theUser }) {
+export default function ShopProfile({ theUser, theUsername }) {
 
+    const [theCurrentUser, settheCurrentUser] = useState(theUsername)
+
+    useEffect(() => {
+      if(theUsername){
+          firestore.collection("users").where("username", "==", theUsername)
+          .get()
+          .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                  // doc.data() is never undefined for query doc snapshots
+                  // console.log(doc.id, " => ", doc.data());
+                  settheCurrentUser(doc.data());
+              });
+          });
+      }
+      
+  }, [theUsername])
+
+    
     return (
-<div className='Post-top-wrapper'>
+        <div className='Post-top-wrapper'>
           <div className="box-center">
-         <Typography className='Personal-profile' variant='h5'>Personal Profile</Typography> 
-        <div className='UserName-box'>
-            <Typography className='UserName' variant='h6'>
-            <img src={theUser?.photoURL } className="card-img-center" />
-              <div className='profileDisplayName'><h2>{theUser?.displayName}</h2></div>
-            </Typography>
-            <Button className='follow-btn' variant='contained'>Follow</Button> 
-            <Typography className='StateSentence' variant='h8'>Hi there! Let's begin!</Typography>
+            <Space h="lg" />
+            <Text size="xl" weight={600}>Shop</Text>
+            <Space h="lg" />
+          <div className='UserName-box'>
+          <AuthCheck
+                fallback={
+                  <>
+                  <Space h={10}/>
+                  <Center>
+                  <Link href="/enter">
+                  <button className="btn-blue">Log in</button>
+                </Link>
+                </Center>
+                <Space h={10}/>
+                </>
+                }
+              >
+            <div className='UserName'>
+    
+                <img src={theUser?.photoURL } className="card-img-center" />
+                <div className='profileDisplayName'>
+                  <div className='ProfileName'>{theUser?.displayName}</div>
+                  <div className='StateSentence' >points: {theCurrentUser?.points}</div>
+                </div>
+                
+              
+            </div>
+            </AuthCheck>
+            {/* <Button className='follow-btn' variant='contained'>Follow</Button>  */}
+            {/* <div className='StateSentence' variant='h8'>Hi there! Let's begin!</div> */}
 
             <div className='UserPoint-box' style={styles.container}>
               
-                <div style={styles.UserPoint_container}> 
-                <Typography className='Number-Picture-following' variant='h8'>Basket</Typography> 
+                {/* <div style={styles.UserPoint_container}>  */}
+                {/* <Typography className='Number-Picture-following' variant='h8'>Basket</Typography>  */}
+                {/* <Link href={`/basket/`} ><button className='basket-button'>Basket</button></Link> */}
+
+                <AuthCheck
+                  fallback={
+                    <>
+                      <Space h={30}/>
+                    </>
+                  }
+                >
+                                  <Group position="center" grow>
+                  <Link href={`/basket/`} ><button className='basket-button'>Basket</button></Link>
+                  <Link href={`/purchased/`} ><button className='basket-button'>Purchased items</button></Link>
+                </Group>
+                </AuthCheck>
+
                
-              </div>
-              <div style={styles.UserPoint_container}> 
-              <Typography className='Number-Picture-following' variant='h8'>DonePurchase </Typography> 
-              </div>
+              {/* </div> */}
+              {/* <div style={styles.UserPoint_container}>  */}
+              {/* <div className='Number-Picture-following' variant='h8'>Done Purchase </div>  */}
+                {/* <Link href={`/basket/`} ><button className='basket-button'>Purchased items</button></Link> */}
+              {/* </div> */}
             </div>
-            
         </div>
         <div className='profilePageSpacer'></div>
        </div>
@@ -75,10 +130,9 @@ export default function ShopProfile({ theUser }) {
         <p>
           <i>@{user.username}</i>
         </p> */}
-
-       
       </div>
-    );
+      
+    ) 
   }
 
   const styles = {
