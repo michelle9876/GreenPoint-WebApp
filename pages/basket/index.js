@@ -154,7 +154,7 @@ export default function BasketPage({ props}) {
           <Text size="md">You can view the barcode</Text>
         </Center>
         <Center>
-          <Text size='md'>in the "Purchased items" section</Text>
+          <Text size='md'>in the Purchased items section</Text>
         </Center>
       </Modal>
 
