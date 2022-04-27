@@ -4,7 +4,7 @@ import { firestore, fromMillis, postToJSON3,auth } from '../lib/firebase';
 
 import { useState } from 'react'; 
 import NewsFeed from '../components/NewsFeed';
-import { TextInput } from '@mantine/core';
+import { TextInput, Group } from '@mantine/core';
 import { Text } from '@mantine/core';
 import { Space } from '@mantine/core';
 import { Center } from '@mantine/core';
@@ -73,20 +73,33 @@ export default function Home(props) {
     {/* console.log(Logo);
     <img src={Logo}  alt='Logo'/> */}
 
+    
+{/* <img src='/images/logo.png' className='logo'/> */}
     <Space h="lg" />
-      <Center>
+    {/* <div className='home-page-banner-row'> */}
+      {/* <Group position="center" grow className='home-page-banner-group'> */}
+        {/* <div> */}
         
-        <Text weight={600} size='xl' className='white-title'>News</Text>
-      </Center>
-      <div className='basket-bottom'>
-        <div className='home-search-area'>
-        <Space h="sm" />
+        {/* </div> */}
+
+        <div className='home-page-banner-content'>
+        <img src='/images/logo.png' className='logo'/>
           <Center>
-          {username != null && <Text size="xl" weight={500} className='white-title'>Welcome! {username}</Text>}
-          {username == null && <Text size="xl" weight={500} className='white-title'>Welcome!</Text>}
+            <Text weight={600} size='xl' className='white-title'>News</Text>
           </Center>
-        </div>
-      </div>
+          <div className='basket-bottom'>
+            <div className='home-search-area'>
+            <Space h="sm" />
+              <Center>
+              {username != null && <Text size="xl" weight={500} className='white-title'>Welcome! {username}</Text>}
+              {username == null && <Text size="xl" weight={500} className='white-title'>Welcome!</Text>}
+              </Center>
+            </div>
+          </div>
+          </div>
+          
+        {/* </Group> */}
+      {/* </div> */}
       <Space h={20}/>
       </div>
       <main>

@@ -1,6 +1,9 @@
 // import {Button,Typography} from '@mui/material';
-import { Text,Space,Button } from '@mantine/core';
+import { Text,Space,Button, Menu, Group, Burger, Center } from '@mantine/core';
+import { Settings, Search, Photo, MessageCircle, Trash, ArrowsLeftRight, User } from 'tabler-icons-react';
+import { useDisclosure } from '@mantine/hooks';
 
+import Link from 'next/link';
 
 import { useEffect, useContext, useState } from 'react'; 
 import { firestore, fromMillis, postToJSON, auth } from '/lib/firebase';
@@ -22,6 +25,8 @@ export default function UserProfile({ thisuser }) {
 
   const [showFollowBTN, setShowFollowBTN] = useState(false);
 
+  const [opened, setOpened] = useState(false);
+  const [menuopened, handlers] = useDisclosure(false);
 
   useEffect(() => {
     if(thisuser){
@@ -113,20 +118,63 @@ useEffect(() => {
         <div className='Post-top-wrapper'>
           <div className="box-center2">
           <Space h="lg" />
-          <Text size="xl" weight={600}>Personal Profile</Text>
+
+          {
+
+            username == thisuser.username ? 
+          //   <Group position='center'>
+          //   <Text size="xl" weight={600}>Personal Profile</Text>
+            // <Menu control={<Burger
+            //     opened={opened}
+            //     onClick={() => setOpened((o) => !o)}
+            //   />}>
+            //   <Menu.Label>Account</Menu.Label>
+            //   <Link href='/enter'>
+            //   <Menu.Item icon={<User size={14} />}>Sign out</Menu.Item>
+            //   </Link>
+            // </Menu>
+          // </Group> 
+          <div className='profile-top-bar'>
+            <Menu control={<Burger
+                color="#34CC98"
+                opened={opened}
+                onClick={() => setOpened((o) => !o)}
+              />} className='profile-top-bar-menu'>
+              <Menu.Label>Account</Menu.Label>
+              <Link href='/enter'>
+              <Menu.Item icon={<User size={14} />}>Sign out</Menu.Item>
+              </Link>
+            </Menu>
+            <Center>
+            <Text size="xl" weight={600}>Personal Profile</Text>
+            </Center>
+          </div>
+          : 
+          <div className='profile-top-bar'>
+            <Center>
+              <Text size="xl" weight={600}>Personal Profile</Text>
+            </Center>
+              </div>
+
+          }
+
+          
           {/* <div>{username} your uid: {user?.uid} this uid: {thisuser?.uid}</div> */}
           <Space h="lg" />
         <div className='UserName-box'>
+            <Space h={10}/>
             <div className='UserName'>
             <img src={thisuser.photoURL } className="card-img-center" />
               {/* <p><i>@{user.username}</i></p> */}
                 <div className='profileDisplayName'>
                   <div className='ProfileName'>{thisuser.displayName}</div>
+
                   {
-                    // showFollowBTN===true ? <Button className='follow-button'>Follow</Button> : <></>
-                    showFollowBTN===true ? <FollowButton yourID={user.uid} yourUsername={username} theirID={thisuser.uid}/> : <></>
-                  } 
                   
+                    // showFollowBTN===true ? <Button className='follow-button'>Follow</Button> : <></>
+                    showFollowBTN===true && username != thisuser.username ? <FollowButton yourID={user.uid} yourUsername={username} theirID={thisuser.uid}/> : <></>
+                  
+                }
                   {/* <div className='StateSentence' > 1</div> */}
               </div>
               <div>

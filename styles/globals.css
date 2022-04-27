@@ -980,3 +980,38 @@ textarea {
   background-color: #eef0f1;
   color:#34cc98;
 }
+
+.logo {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: 20px;
+}
+
+.home-page-banner-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.home-page-banner-content{
+  /* flex-grow: 1; */
+  /* width: 50%; */
+  margin: auto;
+  position: relative;
+}
+
+.home-page-banner-group{
+  /* width: 50%; */
+  margin: auto;
+}
+
+.profile-top-bar{
+  width: 85%;
+  margin: auto;
+  position: relative;
+  text-align: left;
+}
+
+.profile-top-bar-menu{
+  position: absolute;
+}

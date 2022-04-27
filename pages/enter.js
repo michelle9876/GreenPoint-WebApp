@@ -132,10 +132,12 @@ function UsernameForm() {
         <form onSubmit={onSubmit}>
           <input name="username" placeholder="myname" value={formValue} onChange={onChange} />
           <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
+            
           <button type="submit" className="btn-green" disabled={!isValid}>
             Choose
           </button>
-
+          <Space h={20}/>
+{/* 
           <h3>Debug State</h3>
           <div>
             Username: {formValue}
@@ -143,7 +145,7 @@ function UsernameForm() {
             Loading: {loading.toString()}
             <br />
             Username Valid: {isValid.toString()}
-          </div>
+          </div> */}
         </form>
       </section>
     )

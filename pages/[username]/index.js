@@ -12,7 +12,6 @@ import NewsProfile from '../../components/NewsProfile';
 import NewsFeed from '../../components/NewsFeed';
 
 export async function getServerSideProps({ query }) {
-
   
   const { username } = query;
 
