@@ -106,6 +106,7 @@ export default function UserProfilePage({ user, posts }) {
             {postsEnd && 'No more posts'}
       </Center> */}
       {/* <div className='newsSpace'></div> */}
+      <Space h={30}/>
     </div>
   );
 }

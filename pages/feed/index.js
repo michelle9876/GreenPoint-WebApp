@@ -241,6 +241,7 @@ export default function Feed(props) {
 
           <div className='newsSpace'></div> */}
         </main>
+    <Space h={20}/>
     </>
   )
 }

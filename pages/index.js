@@ -117,6 +117,7 @@ export default function Home(props) {
           </Center>
         {/* </div> */}
         
+        <Space h={20}/>
 
         {/* <div className='newsSpace'></div> */}
       </main>

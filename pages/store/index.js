@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 import NextLink from 'next/link';
 import Store from '../../components/Store';
 import { firestore, fromMillis, postToJSON2 } from '../../lib/firebase';
+import { Space } from '@mantine/core';
 // export async function getServerSideProps({ }) {
 //   //const { username } = 'michelle';
 
@@ -87,6 +88,7 @@ export default function ShopProfilePage(props) {
         ))}
       </Grid> */}
       {/* <div className='newsSpace'></div> */}
+      <Space h={100}/>
     </div>
 
     

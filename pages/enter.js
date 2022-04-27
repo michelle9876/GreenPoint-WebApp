@@ -4,6 +4,7 @@ import { UserContext } from '../lib/context';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 import { Image, Center, Space, Text } from '@mantine/core';
+import { Spa } from '@mui/icons-material';
 
 export default function Enter(props) {
   const { user, username } = useContext(UserContext);
@@ -147,6 +148,7 @@ function UsernameForm() {
             Username Valid: {isValid.toString()}
           </div> */}
         </form>
+        <Space h={100}/>
       </section>
     )
   );

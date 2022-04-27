@@ -120,6 +120,7 @@ export default function Post(props) {
         )}
 
       </aside> */}
+      <Space h={30}/>
     </main>
   );
 }
