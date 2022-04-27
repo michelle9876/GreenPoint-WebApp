@@ -352,21 +352,4 @@ function StoreItem({ description, image, quantity, slug, total, name, price, use
     );
   }
 
-const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly'
-    },
-    postContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start'
-    },
-    UserPoint_container: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: 3
-    }
-}
 

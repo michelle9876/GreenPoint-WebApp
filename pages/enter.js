@@ -8,11 +8,7 @@ import { Image, Center, Space, Text } from '@mantine/core';
 export default function Enter(props) {
   const { user, username } = useContext(UserContext);
 
-  // 1. user signed out <SignInButton />
-  // 2. user signed in, but missing username <UsernameForm />
-  // 3. user signed in, has username <SignOutButton />
   return (
-    // <main>
     <>
     <div className='enter-page-container'>
     <div style={{ width: 400, marginLeft: 'auto', marginRight: 'auto' }}>
@@ -137,15 +133,6 @@ function UsernameForm() {
             Choose
           </button>
           <Space h={20}/>
-{/* 
-          <h3>Debug State</h3>
-          <div>
-            Username: {formValue}
-            <br />
-            Loading: {loading.toString()}
-            <br />
-            Username Valid: {isValid.toString()}
-          </div> */}
         </form>
       </section>
     )
