@@ -11,7 +11,7 @@ export async function getServerSideProps({}) {
   let user = null;
   let posts = null;
 
-  const uid = null
+  let uid = null
   uid = auth.currentUser.uid;
 
   if(uid != null){

@@ -13,6 +13,21 @@ import Link from 'next/link';
 // Max post to query per page
 const LIMIT = 5;
 
+// export async function getServerSideProps(context) {
+//   const postsQuery = firestore
+//     .collectionGroup('posts')
+//     .where('published', '==', true)
+//     .orderBy('createdAt', 'desc')
+//     .limit(LIMIT);
+
+//   const posts = (await postsQuery.get()).docs.map(postToJSON);
+//   console.log("ssr: ", posts);
+
+//   return {
+//     props: { posts }, // will be passed to the page component as props
+//   };
+// }
+
 export default function Feed(props) {
   // const [posts, setPosts] = useState(props.posts);
   
@@ -83,6 +98,12 @@ export default function Feed(props) {
           setRender(true);
       });
       
+      // thefollowings = [...thefollowings,{uid: user.uid, username: username}];
+      // console.log("theFollowings: ", thefollowings);
+      // console.log("theFollowingsLength: ", thefollowings.length);
+      // console.log("[0]: ", thefollowings[0]);
+      // console.log("[1]: ", thefollowings[1]);
+      // setFollowings(thefollowings);
     }
   },[user, username])
 
@@ -91,6 +112,92 @@ export default function Feed(props) {
     setCounter(counter+1);
     setPostsToShow(posts);
   },[posts])
+
+  // useEffect(()=>{
+  //   if(loadPosts){
+  //     var thePosts = [];
+  //     // console.log('theFollowings is here: ', followings);
+  //     for (let i = 0; i < followings.length; i++) {
+  //       var theUID = followings[i].uid;
+  //       // console.log('theUID: ', theUID);
+  //       // console.log('followings in loop: ', followings);
+  //       // console.log('followings length b4 loop: ', followings.length);
+  //       // const postsQuery = firestore
+  //       // .collectionGroup('posts')
+  //       // .where('published', '==', true)
+  //       // .where('uid', '==', theUID)
+  //       // .orderBy('createdAt', 'desc')
+    
+  //       // const followingPosts = (await postsQuery.get()).docs.map(postToJSON);
+  //       var followingPosts = [];
+  //       firestore.collectionGroup("posts").where('published', '==', true).where('uid', '==', theUID).orderBy('createdAt', 'desc').get()
+  //       .then((querySnapshot) => {
+  //           querySnapshot.forEach((doc) => {
+  //               // doc.data() is never undefined for query doc snapshots
+  //               console.log("loops", i , theUID, " => ", doc.data());
+  //               // followingPosts.push(doc.data());
+  //               // //  settheCurrentUser(doc.data());
+  //               // console.log('thePosts in fetch: ', followingPosts);
+  //               thePosts.push(doc.data());
+                
+  //           });
+  //           // setPosts(thePosts);
+  //           // console.log('thePosts now: ', thePosts);
+  //       });
+
+  //       // thePosts.push(...followingPosts);
+  //       // console.log('thePosts2: ', thePosts);
+  //       // setPosts(thePosts);
+  //     }
+
+  //     setPosts(thePosts);
+  //     console.log('thePosts now: ', thePosts);
+
+  //     // console.log('thePosts33: ', thePosts);
+  //     // setPosts(thePosts);
+  //     // setPosts(thePosts);
+  //     // setloadPosts(false);
+  //   }
+  // },[loadPosts])
+
+
+
+  // useEffect(()=>{
+  //     if(posts != null){
+  //       console.log("posts finally: ", posts);
+  //       setPostsToShow(posts);
+  //       setRender(true);
+  //     }
+  // },[posts])
+
+  // useEffect(()=>{
+  //   console.log('postsToShow: ', postsToShow);
+  // }, [postsToShow])
+
+
+  // const getMorePosts = async () => {
+  //   setLoading(true);
+  //   const last = posts[posts.length - 1];
+
+  //   const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
+
+  //   const query = firestore
+  //     .collectionGroup('posts')
+  //     .where('published', '==', true)
+  //     .orderBy('createdAt', 'desc')
+  //     .startAfter(cursor)
+  //     .limit(LIMIT);
+
+  //   const newPosts = (await query.get()).docs.map((doc) => doc.data());
+
+  //   console.log('new posts: ', newPosts);
+  //   setPosts(posts.concat(newPosts));
+  //   setLoading(false);
+
+  //   if (newPosts.length < LIMIT) {
+  //     setPostsEnd(true);
+  //   }
+  // };
 
   return  (
     <>

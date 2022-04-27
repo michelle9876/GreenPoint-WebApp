@@ -70,8 +70,17 @@ export default function Home(props) {
   return (
     <>
     <div className='news-top'>
+    {/* console.log(Logo);
+    <img src={Logo}  alt='Logo'/> */}
 
+    
+{/* <img src='/images/logo.png' className='logo'/> */}
     <Space h="lg" />
+    {/* <div className='home-page-banner-row'> */}
+      {/* <Group position="center" grow className='home-page-banner-group'> */}
+        {/* <div> */}
+        
+        {/* </div> */}
 
         <div className='home-page-banner-content'>
         <img src='/images/logo.png' className='logo'/>
@@ -88,7 +97,9 @@ export default function Home(props) {
             </div>
           </div>
           </div>
-
+          
+        {/* </Group> */}
+      {/* </div> */}
       <Space h={20}/>
       </div>
       <main>
@@ -98,12 +109,16 @@ export default function Home(props) {
         < NewsFeed posts={posts} />
 
 
+        {/* <div className='newsBtnAlign'> */}
           <Center>
             {!loading && !postsEnd && <button onClick={getMorePosts} className="load-button">Load more</button>}    
             <Loader show={loading} />
             {postsEnd && 'No more news'}
           </Center>
+        {/* </div> */}
+        
 
+        {/* <div className='newsSpace'></div> */}
       </main>
     </>
 
