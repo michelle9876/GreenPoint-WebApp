@@ -486,9 +486,9 @@ input[type="file"] {
   top: 65px;
   background: #34CC98;
   border-radius: 0px 0px 20px 20px;
-  display: 'flex';
-  flex-direction: 'row';
-  justify-content: 'space-evenly'
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   }
 
   .profileDisplayName{

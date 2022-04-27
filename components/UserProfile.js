@@ -188,22 +188,22 @@ useEffect(() => {
                 <div className='UserPoint_container'> 
                 <div className='Picture-following' >Posts</div>
                 <div className='Number-Picture-following' >{thisuser.posts}</div> 
-               
-              </div>
-              <div className='UserPoint_container' > 
-              <div className='Picture-following'>Points </div>
-              <div className='Number-Picture-following' > {thisuser.points} </div> 
-              </div>
+                </div>
+                
+                <div className='UserPoint_container' > 
+                <div className='Picture-following'>Points </div>
+                <div className='Number-Picture-following' > {thisuser.points} </div> 
+                </div>
 
-              <div className='UserPoint_container' > 
-              <div className='Picture-following'>Followers </div>
-              <div className='Number-Picture-following' > {followersAmount}  </div> 
-              </div>
+                <div className='UserPoint_container' > 
+                <div className='Picture-following'>Followers </div>
+                <div className='Number-Picture-following' > {followersAmount}  </div> 
+                </div>
 
-              <div className='UserPoint_container' > 
-              <div className='Picture-following'>Following </div>
-              <div className='Number-Picture-following' > {followingsAmount} </div> 
-              </div>
+                <div className='UserPoint_container' > 
+                <div className='Picture-following'>Following </div>
+                <div className='Number-Picture-following' > {followingsAmount} </div> 
+                </div>
             </div>
             
         </div>
