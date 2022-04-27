@@ -183,24 +183,24 @@ useEffect(() => {
             </div>
             {/* <Button className='follow-btn' variant='contained'>Follow</Button>  */}
 
-            <div className='UserPoint-box' style={styles.container}>
+            <div className='UserPoint-box'>
               
-                <div style={styles.UserPoint_container}> 
+                <div className='UserPoint_container'> 
                 <div className='Picture-following' >Posts</div>
                 <div className='Number-Picture-following' >{thisuser.posts}</div> 
                
               </div>
-              <div style={styles.UserPoint_container}> 
+              <div className='UserPoint_container' > 
               <div className='Picture-following'>Points </div>
               <div className='Number-Picture-following' > {thisuser.points} </div> 
               </div>
 
-              <div style={styles.UserPoint_container}> 
+              <div className='UserPoint_container' > 
               <div className='Picture-following'>Followers </div>
               <div className='Number-Picture-following' > {followersAmount}  </div> 
               </div>
 
-              <div style={styles.UserPoint_container}> 
+              <div className='UserPoint_container' > 
               <div className='Picture-following'>Following </div>
               <div className='Number-Picture-following' > {followingsAmount} </div> 
               </div>
@@ -217,22 +217,4 @@ useEffect(() => {
        
       </div>
     );
-  }
-
-  const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly'
-    },
-    postContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-start'
-    },
-    UserPoint_container: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: 3
-    }
   }

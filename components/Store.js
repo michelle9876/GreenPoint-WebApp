@@ -51,14 +51,14 @@ export default function Store({items, admin, theUser}) {
   return (
     <div className="box-center">
     <div className='profilePageSpacer'></div>
-       <div className="point-store-bar" style={styles.container}>
-          <div style={styles.UserPoint_container}> 
+       <div className="point-store-bar">
+          <div className='UserPoint_container'> 
           <button className='product-button' onClick={allSelected}>All</button>
           </div>
-          <div style={styles.UserPoint_container}> 
+          <div className='UserPoint_container'> 
           <button className='product-button' onClick={productSelected}>Product</button>
           </div>
-          <div style={styles.UserPoint_container}> 
+          <div className='UserPoint_container'> 
           <button className='product-button' onClick={couponSelected}>Coupon</button>
           </div>
        </div>  
@@ -157,20 +157,3 @@ function StoreItem({ item, theUser }) {
   );
 }
 
-const styles = {
-  container: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-evenly'
-  },
-  postContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start'
-  },
-  UserPoint_container: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginTop: 0
-  }
-}

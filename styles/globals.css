@@ -569,6 +569,9 @@ input[type="file"] {
   /* margin-bottom: 10px; */
   background: #34CC98;
   border-radius: 0px 0px 20px 20px;
+  display: 'flex';
+  flex-direction: 'row';
+  justify-content: 'space-evenly'
   }
 
   .profileDisplayName{
@@ -743,6 +746,9 @@ input[type="file"] {
     background:#FFFFFF;;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30.5px;
+    display: 'flex';
+    flex-direction: 'row';
+    justify-content: 'space-evenly';
   }
 
   .home-top{
@@ -1014,4 +1020,23 @@ textarea {
 
 .profile-top-bar-menu{
   position: absolute;
+}
+
+
+.shopprofile_container {
+  display: 'flex';
+  flex-direction: 'row';
+  justify-content: 'space-evenly';
+}
+
+.postContainer {
+display: 'flex';
+flex-direction: 'row';
+justify-content: 'flex-start';
+}
+
+.UserPoint_container {
+  display: 'flex';
+  flex-direction: 'column';
+  margin-top: 3;
 }

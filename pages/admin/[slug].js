@@ -99,24 +99,7 @@ function PostForm({ defaultValues, postRef, preview }) {
   React.useEffect(()=>{
     console.log("imageUrl: ", imageUrl);
   }, [imageUrl])
-  // const [imgURL, setImgURL] = useState(null);
 
-  // const setTheImgURL = (theIMG) => {
-  //   setImageUrl(theIMG);
-  // }
-  // const updatePost = async ({ content, published, category, imageURL }) => {
-  //   await postRef.update({
-  //     category,
-  //     content,
-  //     published,
-  //     imageURL,
-  //     updatedAt: serverTimestamp(),
-  //   });
-
-  //   reset({ content, published, category, imageURL });
-
-  //   toast.success('Post updated successfully!')
-  // };
 
   const updatePost = async ({ content, published, category }) => {
     await postRef.update({

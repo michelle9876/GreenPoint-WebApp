@@ -97,7 +97,7 @@ export default function ShopProfile({ theUser, theUsername }) {
             {/* <Button className='follow-btn' variant='contained'>Follow</Button>  */}
             {/* <div className='StateSentence' variant='h8'>Hi there! Let's begin!</div> */}
 
-            <div className='UserPoint-box' style={styles.container}>
+            <div className='UserPoint-box'>
               
                 {/* <div style={styles.UserPoint_container}>  */}
                 {/* <Typography className='Number-Picture-following' variant='h8'>Basket</Typography>  */}
@@ -133,22 +133,4 @@ export default function ShopProfile({ theUser, theUsername }) {
       </div>
       
     ) 
-  }
-
-  const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly'
-    },
-    postContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-start'
-    },
-    UserPoint_container: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: 3
-    }
   }
