@@ -213,6 +213,7 @@ export default function BasketPage({ props}) {
           
         </div>
         
+        <Space h={40}/>
         </>
     ) : (
         <></>

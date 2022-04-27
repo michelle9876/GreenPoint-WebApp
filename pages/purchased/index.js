@@ -187,7 +187,7 @@ export default function PurchasedPage({props}) {
                     </div>
            </div>   */}
            {items ? items.map((item) => <StoreItem key={item.image} user={item.user} price={item.price} description={item.description} image={item.image} quantity={item.quantity} slug={item.slug} total={item.total} name={item.name} date={item.createdAt}/>) : null}
-          
+           <Space h={60}/>
         </div>
         
         </>
@@ -330,11 +330,16 @@ function StoreItem({ description, image, quantity, slug, total, name, price, use
   
         <div className='flex1'>
           <div className='shop-button-column'>
-            <button className='shop-button2' disabled={diff>=0} onClick={() => { setModalOpened(true);}}><Barcode
-    size={25}
-    strokeWidth={2}
-    color={'#000000'}
-  />Show barcode</button>
+            <button className='shop-button2' disabled={diff>=0} onClick={() => { setModalOpened(true);}}>
+              <div className='barcode-button'>
+              <Barcode
+              size={25}
+              strokeWidth={2}
+              color={'#FFFFFF'}/>
+              <>
+              Barcode</>
+              </div>
+              </button>
   
           </div>
           {/* <div className='shop-button-column'>
@@ -348,6 +353,7 @@ function StoreItem({ description, image, quantity, slug, total, name, price, use
        } 
       
       </Card>
+      
     </div>
     );
   }
