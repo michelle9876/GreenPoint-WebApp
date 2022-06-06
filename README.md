@@ -11,6 +11,7 @@
 You're sections headers will be used to reference location of destination.
 
 - [Description](#description)
+- [Getting Started](#getting-started)
 - [Features](#features)
 - [Author Info](#author-info)
 
