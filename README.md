@@ -12,6 +12,7 @@
 
 - [Description](#description)
 - [Getting Started](#getting-started)
+- [Demo Video](#demo-video)
 - [Features](#features)
 - [Author Info](#author-info)
 
@@ -43,7 +44,13 @@ yarn dev
 ```
 
 ---
+## Demo Video
 
+
+https://github.com/michelle9876/GreenPoint-WebApp/assets/50590112/7ddf8910-4335-49cf-b220-2738cc700459
+
+
+---
 ## Features
 
 #### Login/ Register
