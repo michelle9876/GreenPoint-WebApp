@@ -19,12 +19,11 @@
 ---
 
 ## Description
-This project is to encourage people to join in small actions for making a good environment and share their actions in daily life. Also, it provide users with environmental news to keep paying attention to environmental issues. In addition, using a rewarding point system through this web application, users can receive some benefits from eco-friendly actions, and it makes them feel proud of themselves as well.
+This project encourages people to join in small actions to make a good environment and share their actions in daily life. Also, it provides users with environmental news to keep paying attention to environmental issues. In addition, using a rewarding point system through this web application, users can receive some benefits from eco-friendly actions, making them feel proud of themselves as well.
 
-This project is implmented for reducing environmental waste issues and improving users' popularity and involving eco-friendly actions by using Green Point web application.
+This project is implemented to reduce environmental waste issues, improve users' popularity, and involve eco-friendly actions using the Green Point web application.
 
-
-#### Technologies
+#### Tech Stack
 
 - Next.js
 - HTML
